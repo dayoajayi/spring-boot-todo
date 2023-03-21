@@ -2,18 +2,19 @@ package com.dayoajayi.springboottodo.services;
 
 import com.dayoajayi.springboottodo.models.TodoItem;
 import com.dayoajayi.springboottodo.repositories.TodoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class TodoService {
+    private TodoRepository todoRepository;
 
-    @Autowired // injecting the instantiated
-    private TodoRepository todoRepo;
+    public TodoService(TodoRepository todoRepository) {
+        this.todoRepository = todoRepository;
+    }
 
-    public List<TodoItem> fetchAllTodoItems(){
-        return todoRepo.fetchAllTodoItems();
+    public List<TodoItem> findAll() {
+        return todoRepository.findAll();
     }
 }
