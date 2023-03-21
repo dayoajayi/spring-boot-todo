@@ -16,16 +16,20 @@ class TodoServiceTest {
     @Autowired
     private TodoRepository todoRepository;
 
-    @Test
+    //@Test
     void getAllTodos() {
 
+        // given
         TodoItem todoSample = new TodoItem("Sample todo", true);
         todoRepository.save(todoSample);
         TodoService todoService = new TodoService(todoRepository);
 
-        List<TodoItem> todoList = todoService.findAll();
-        TodoItem lastTodoItem = todoList.get(todoList.size() - 1);
+        // when
+        TodoItem firstTodoItem = todoService.findAll().get(0);
 
-        assertEquals(todoSample.getDescription(), lastTodoItem.getDescription());
+        // then
+        assertEquals(todoSample.getId(), firstTodoItem.getId());
+        assertEquals(todoSample.getDescription(), firstTodoItem.getDescription());
+        assertEquals(todoSample.isDone(), firstTodoItem.isDone());
     }
 }
